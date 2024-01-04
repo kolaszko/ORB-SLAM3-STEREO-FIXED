@@ -24,7 +24,11 @@
 #include "KeyFrame.h"
 
 #include <set>
+
+#ifndef LITE
 #include <pangolin/pangolin.h>
+#endif
+
 #include <mutex>
 
 #include <boost/serialization/base_object.hpp>
@@ -186,9 +190,11 @@ protected:
     // Index related to a big change in the map (loop closure, global BA)
     int mnBigChangeIdx;
 
-
+#ifndef LITE
     // View of the map in aerial sight (for the AtlasViewer)
     GLubyte* mThumbnail;
+
+#endif
 
     bool mIsInUse;
     bool mHasTumbnail;

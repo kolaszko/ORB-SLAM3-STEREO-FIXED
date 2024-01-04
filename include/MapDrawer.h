@@ -24,7 +24,10 @@
 #include"MapPoint.h"
 #include"KeyFrame.h"
 #include "Settings.h"
+
+#ifndef LITE
 #include<pangolin/pangolin.h>
+#endif
 
 #include<mutex>
 
@@ -39,16 +42,17 @@ public:
     EIGEN_MAKE_ALIGNED_OPERATOR_NEW
     MapDrawer(Atlas* pAtlas, const string &strSettingPath, Settings* settings);
 
-    void newParameterLoader(Settings* settings);
-
     Atlas* mpAtlas;
 
+#ifndef LITE
+    void newParameterLoader(Settings* settings);
     void DrawMapPoints();
     void DrawKeyFrames(const bool bDrawKF, const bool bDrawGraph, const bool bDrawInertialGraph, const bool bDrawOptLba);
     void DrawCurrentCamera(pangolin::OpenGlMatrix &Twc);
     void SetCurrentCameraPose(const Sophus::SE3f &Tcw);
     void SetReferenceKeyFrame(KeyFrame *pKF);
     void GetCurrentOpenGLCameraMatrix(pangolin::OpenGlMatrix &M, pangolin::OpenGlMatrix &MOw);
+#endif
 
 private:
 

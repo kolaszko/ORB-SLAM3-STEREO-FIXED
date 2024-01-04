@@ -18,8 +18,9 @@
 
 
 #include "Viewer.h"
+#ifndef LITE
 #include <pangolin/pangolin.h>
-
+#endif
 #include <mutex>
 
 namespace ORB_SLAM3
@@ -161,6 +162,7 @@ bool Viewer::ParseViewerParamFile(cv::FileStorage &fSettings)
 
 void Viewer::Run()
 {
+#ifndef LITE
     mbFinished = false;
     mbStopped = false;
 
@@ -381,6 +383,7 @@ void Viewer::Run()
     }
 
     SetFinish();
+#endif
 }
 
 void Viewer::RequestFinish()

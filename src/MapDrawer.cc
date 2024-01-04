@@ -19,7 +19,11 @@
 #include "MapDrawer.h"
 #include "MapPoint.h"
 #include "KeyFrame.h"
+
+#ifndef LITE
 #include <pangolin/pangolin.h>
+#endif
+
 #include <mutex>
 
 namespace ORB_SLAM3
@@ -28,6 +32,7 @@ namespace ORB_SLAM3
 
 MapDrawer::MapDrawer(Atlas* pAtlas, const string &strSettingPath, Settings* settings):mpAtlas(pAtlas)
 {
+#ifndef LITE
     if(settings){
         newParameterLoader(settings);
     }
@@ -48,8 +53,10 @@ MapDrawer::MapDrawer(Atlas* pAtlas, const string &strSettingPath, Settings* sett
             }
         }
     }
+#endif
 }
 
+#ifndef LITE
 void MapDrawer::newParameterLoader(Settings *settings) {
     mKeyFrameSize = settings->keyFrameSize();
     mKeyFrameLineWidth = settings->keyFrameLineWidth();
@@ -464,4 +471,5 @@ void MapDrawer::GetCurrentOpenGLCameraMatrix(pangolin::OpenGlMatrix &M, pangolin
     MOw.m[13] = Twc(1,3);
     MOw.m[14] = Twc(2,3);
 }
+#endif
 } //namespace ORB_SLAM

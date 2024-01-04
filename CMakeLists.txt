@@ -28,6 +28,13 @@ else()
    message(FATAL_ERROR "The compiler ${CMAKE_CXX_COMPILER} has no C++11 support. Please use a different C++ compiler.")
 endif()
 
+option(USE_LITE "Lite mode without GUI" ON)
+if(USE_LITE)
+   add_definitions(-DLITE)
+endif()
+message("======= IS LITE MODE USED?: " ${USE_LITE})
+
+
 LIST(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake_modules)
 
 find_package(OpenCV 4.2)
@@ -39,17 +46,30 @@ MESSAGE("OPENCV VERSION:")
 MESSAGE(${OpenCV_VERSION})
 
 find_package(Eigen3 3.1.0 REQUIRED)
-find_package(Pangolin REQUIRED)
+if(NOT USE_LITE)
+   find_package(Pangolin REQUIRED)
+endif()
 find_package(realsense2)
 
+if(USE_LITE)
 include_directories(
-${PROJECT_SOURCE_DIR}
-${PROJECT_SOURCE_DIR}/include
-${PROJECT_SOURCE_DIR}/include/CameraModels
-${PROJECT_SOURCE_DIR}/Thirdparty/Sophus
-${EIGEN3_INCLUDE_DIR}
-${Pangolin_INCLUDE_DIRS}
+   ${PROJECT_SOURCE_DIR}
+   ${PROJECT_SOURCE_DIR}/include
+   ${PROJECT_SOURCE_DIR}/include/CameraModels
+   ${PROJECT_SOURCE_DIR}/Thirdparty/Sophus
+   ${EIGEN3_INCLUDE_DIR}
 )
+else()
+include_directories(
+   ${PROJECT_SOURCE_DIR}
+   ${PROJECT_SOURCE_DIR}/include
+   ${PROJECT_SOURCE_DIR}/include/CameraModels
+   ${PROJECT_SOURCE_DIR}/Thirdparty/Sophus
+   ${EIGEN3_INCLUDE_DIR}
+   ${Pangolin_INCLUDE_DIRS}
+)
+endif()
+
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
 
@@ -69,15 +89,26 @@ add_library(${PROJECT_NAME} SHARED
 
 add_subdirectory(Thirdparty/g2o)
 
+if(USE_LITE)
 target_link_libraries(${PROJECT_NAME}
-${OpenCV_LIBS}
-${EIGEN3_LIBS}
-${Pangolin_LIBRARIES}
-${PROJECT_SOURCE_DIR}/Thirdparty/DBoW2/lib/libDBoW2.so
-${PROJECT_SOURCE_DIR}/Thirdparty/g2o/lib/libg2o.so
--lboost_serialization
--lcrypto
+   ${OpenCV_LIBS}
+   ${EIGEN3_LIBS}
+   ${PROJECT_SOURCE_DIR}/Thirdparty/DBoW2/lib/libDBoW2.so
+   ${PROJECT_SOURCE_DIR}/Thirdparty/g2o/lib/libg2o.so
+   -lboost_serialization
+   -lcrypto
 )
+else()
+target_link_libraries(${PROJECT_NAME}
+   ${OpenCV_LIBS}
+   ${EIGEN3_LIBS}
+   ${Pangolin_LIBRARIES}
+   ${PROJECT_SOURCE_DIR}/Thirdparty/DBoW2/lib/libDBoW2.so
+   ${PROJECT_SOURCE_DIR}/Thirdparty/g2o/lib/libg2o.so
+   -lboost_serialization
+   -lcrypto
+)
+endif()
 
 # If RealSense SDK is found the library is added and its examples compiled
 if(realsense2_FOUND)

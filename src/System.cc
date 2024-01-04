@@ -21,7 +21,9 @@
 #include "System.h"
 #include "Converter.h"
 #include <thread>
+#ifndef LITE
 #include <pangolin/pangolin.h>
+#endif
 #include <iomanip>
 #include <openssl/md5.h>
 #include <boost/serialization/base_object.hpp>
