@@ -49,7 +49,8 @@ find_package(Eigen3 3.1.0 REQUIRED)
 if(NOT USE_LITE)
    find_package(Pangolin REQUIRED)
 endif()
-find_package(realsense2)
+
+# find_package(realsense2)
 
 find_package(Sophus REQUIRED)
 
@@ -59,7 +60,6 @@ include_directories(
    ${PROJECT_SOURCE_DIR}/include
    ${PROJECT_SOURCE_DIR}/include/CameraModels
    #${PROJECT_SOURCE_DIR}/Thirdparty/Sophus
-   Sophus::Sophus
    ${EIGEN3_INCLUDE_DIR}
 )
 else()
@@ -91,14 +91,14 @@ add_library(${PROJECT_NAME} SHARED
   ${HEADER_FILES}
 )
 
-find_package(dbow2 REQUIRED)
+find_package(DBoW2 REQUIRED)
 find_package(g2o REQUIRED)
 
 if(USE_LITE)
 target_link_libraries(${PROJECT_NAME}
    ${OpenCV_LIBS}
    ${EIGEN3_LIBS}
-   dbow2::dbow2
+   DBoW2::DBoW2
    g2o::g2o
    #${PROJECT_SOURCE_DIR}/Thirdparty/DBoW2/lib/libDBoW2.so
    #${PROJECT_SOURCE_DIR}/Thirdparty/g2o/lib/libg2o.so
@@ -109,7 +109,7 @@ else()
 target_link_libraries(${PROJECT_NAME}
    ${OpenCV_LIBS}
    ${EIGEN3_LIBS}
-   dbow2::dbow2
+   DBoW2::DBoW2
    g2o::g2o
    #${Pangolin_LIBRARIES}
    #${PROJECT_SOURCE_DIR}/Thirdparty/DBoW2/lib/libDBoW2.so
