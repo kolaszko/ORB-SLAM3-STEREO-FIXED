@@ -31,7 +31,7 @@
 #include "BowVector.h"
 #include "ScoringObject.h"
 
-#include "../DUtils/Random.h"
+#include "Random.h"
 
 using namespace std;
 

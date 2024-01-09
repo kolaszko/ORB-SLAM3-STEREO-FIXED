@@ -28,7 +28,7 @@
 #define G2O_FACTORY_H
 
 #include "../../config.h"
-#include "../stuff/misc.h"
+#include "misc.h"
 #include "hyper_graph.h"
 #include "creators.h"
 

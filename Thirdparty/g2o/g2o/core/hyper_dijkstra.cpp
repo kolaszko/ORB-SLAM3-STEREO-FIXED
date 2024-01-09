@@ -30,7 +30,7 @@
 #include <assert.h>
 #include <iostream>
 #include "hyper_dijkstra.h"
-#include "../stuff/macros.h"
+#include "macros.h"
 
 namespace g2o{
 
