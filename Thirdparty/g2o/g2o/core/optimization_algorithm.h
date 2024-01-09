@@ -31,7 +31,7 @@
 #include <utility>
 #include <iosfwd>
 
-#include "property.h"
+#include "../stuff/property.h"
 
 #include "hyper_graph.h"
 #include "sparse_block_matrix.h"

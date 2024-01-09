@@ -28,8 +28,8 @@
 
 #include <iostream>
 
-#include "timeutil.h"
-#include "macros.h"
+#include "../stuff/timeutil.h"
+#include "../stuff/macros.h"
 
 #include "solver.h"
 #include "batch_stats.h"
