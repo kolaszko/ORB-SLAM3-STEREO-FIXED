@@ -45,7 +45,7 @@ target_link_libraries(DBoW2 ${OpenCV_LIBS})
 
 set_target_properties(DBoW2
     PROPERTIES PUBLIC_HEADER
-    "DBoW2/DBoW2/BowVector.h;DBoW2/DBoW2/FORB.h;DBoW2/DBoW2/FClass.h;DBoW2/DBoW2/FeatureVector.h;DBoW2/DBoW2/ScoringObject.h;DBoW2/DBoW2/TemplatedVocabulary.h"
+    "DBoW2/BowVector.h;DBoW2/FORB.h;DBoW2/FClass.h;DBoW2/FeatureVector.h;DBoW2/ScoringObject.h;DBoW2/TemplatedVocabulary.h"
     )
 
 install(TARGETS DBoW2
