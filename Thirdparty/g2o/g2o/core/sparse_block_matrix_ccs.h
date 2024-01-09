@@ -31,8 +31,8 @@
 #include <cassert>
 #include <Eigen/Core>
 
-#include "config.h"
-#include "matrix_operations.h"
+#include "g2o/core/config.h"
+#include "g2o/core/matrix_operations.h"
 
 #ifdef _MSC_VER
 #include <unordered_map>

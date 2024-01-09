@@ -35,10 +35,10 @@
 #include <cassert>
 #include <Eigen/Core>
 
-#include "sparse_block_matrix_ccs.h"
-#include "matrix_structure.h"
-#include "matrix_operations.h"
-#include "config.h"
+#include "g2o/core/sparse_block_matrix_ccs.h"
+#include "g2o/core/matrix_structure.h"
+#include "g2o/core/matrix_operations.h"
+#include "g2o/core/config.h"
 
 namespace g2o {
   using namespace Eigen;
@@ -226,6 +226,6 @@ std::ostream& operator << (std::ostream&, const SparseBlockMatrix<MatrixType>& m
 
 } //end namespace
 
-#include "sparse_block_matrix.hpp"
+#include "g2o/core/sparse_block_matrix.hpp"
 
 #endif

@@ -33,15 +33,15 @@
 #include <cassert>
 #include <algorithm>
 
-#include "estimate_propagator.h"
-#include "optimization_algorithm.h"
-#include "batch_stats.h"
-#include "hyper_graph_action.h"
-#include "robust_kernel.h"
-#include "timeutil.h"
-#include "macros.h"
-#include "misc.h"
-#include "config.h"
+#include "g2o/core/estimate_propagator.h"
+#include "g2o/core/optimization_algorithm.h"
+#include "g2o/core/batch_stats.h"
+#include "g2o/core/hyper_graph_action.h"
+#include "g2o/core/robust_kernel.h"
+#include "g2o/core/timeutil.h"
+#include "g2o/core/macros.h"
+#include "g2o/core/misc.h"
+#include "g2o/core/config.h"
 
 namespace g2o{
   using namespace std;

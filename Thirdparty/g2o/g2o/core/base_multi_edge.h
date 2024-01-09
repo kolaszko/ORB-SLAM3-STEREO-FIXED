@@ -33,9 +33,9 @@
 
 #include <Eigen/StdVector>
 
-#include "base_edge.h"
-#include "robust_kernel.h"
-#include "config.h"
+#include "g2o/core/base_edge.h"
+#include "g2o/core/robust_kernel.h"
+#include "g2o/core/config.h"
 
 namespace g2o {
 

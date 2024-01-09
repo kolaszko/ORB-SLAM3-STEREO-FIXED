@@ -27,10 +27,10 @@
 #ifndef G2O_FACTORY_H
 #define G2O_FACTORY_H
 
-#include "config.h"
-#include "misc.h"
-#include "hyper_graph.h"
-#include "creators.h"
+#include "g2o/core/config.h"
+#include "g2o/core/misc.h"
+#include "g2o/core/hyper_graph.h"
+#include "g2o/core/creators.h"
 
 #include <string>
 #include <map>

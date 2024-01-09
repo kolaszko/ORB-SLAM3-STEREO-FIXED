@@ -27,7 +27,7 @@
 #ifndef G2O_ROBUST_KERNEL_FACTORY_H
 #define G2O_ROBUST_KERNEL_FACTORY_H
 
-#include "misc.h"
+#include "g2o/core/misc.h"
 
 #include <string>
 #include <map>
