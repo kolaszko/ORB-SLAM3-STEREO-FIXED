@@ -22,11 +22,11 @@ set(SRCS_DBOW2
   DBoW2/ScoringObject.cpp)
 
 set(HDRS_DUTILS
-  DUtils/Random.h
-  DUtils/Timestamp.h)
+DBoW2/Random.h
+DBoW2/Timestamp.h)
 set(SRCS_DUTILS
-  DUtils/Random.cpp
-  DUtils/Timestamp.cpp)
+DBoW2/Random.cpp
+DBoW2/Timestamp.cpp)
 
 
 find_package(OpenCV 4 QUIET)
@@ -45,7 +45,7 @@ target_link_libraries(DBoW2 ${OpenCV_LIBS})
 
 set_target_properties(DBoW2
     PROPERTIES PUBLIC_HEADER
-    "DBoW2/BowVector.h;DBoW2/FORB.h;DBoW2/FClass.h;DBoW2/FeatureVector.h;DBoW2/ScoringObject.h;DBoW2/TemplatedVocabulary.h;DUtils/Random.h;DUtils/Timestamp.h"
+    "DBoW2/BowVector.h;DBoW2/FORB.h;DBoW2/FClass.h;DBoW2/FeatureVector.h;DBoW2/ScoringObject.h;DBoW2/TemplatedVocabulary.h;DBoW2/Random.h;DBoW2/Timestamp.h"
     )
 
 install(TARGETS DBoW2
