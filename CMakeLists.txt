@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
 project(ORB_SLAM3)
 
 IF(NOT CMAKE_BUILD_TYPE)
@@ -9,8 +9,8 @@ MESSAGE("Build type: " ${CMAKE_BUILD_TYPE})
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -Wall   -O3")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall   -O3")
-set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE} -march=native")
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -march=native")
+set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS_RELEASE}")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE}")
 
 # Check C++14 or C++0x support
 include(CheckCXXCompilerFlag)
@@ -51,12 +51,15 @@ if(NOT USE_LITE)
 endif()
 find_package(realsense2)
 
+find_package(Sophus REQUIRED)
+
 if(USE_LITE)
 include_directories(
    ${PROJECT_SOURCE_DIR}
    ${PROJECT_SOURCE_DIR}/include
    ${PROJECT_SOURCE_DIR}/include/CameraModels
-   ${PROJECT_SOURCE_DIR}/Thirdparty/Sophus
+   #${PROJECT_SOURCE_DIR}/Thirdparty/Sophus
+   Sophus::Sophus
    ${EIGEN3_INCLUDE_DIR}
 )
 else()
@@ -64,7 +67,8 @@ include_directories(
    ${PROJECT_SOURCE_DIR}
    ${PROJECT_SOURCE_DIR}/include
    ${PROJECT_SOURCE_DIR}/include/CameraModels
-   ${PROJECT_SOURCE_DIR}/Thirdparty/Sophus
+   #${PROJECT_SOURCE_DIR}/Thirdparty/Sophus
+   Sophus::Sophus
    ${EIGEN3_INCLUDE_DIR}
    ${Pangolin_INCLUDE_DIRS}
 )
@@ -87,14 +91,17 @@ add_library(${PROJECT_NAME} SHARED
   ${HEADER_FILES}
 )
 
-add_subdirectory(Thirdparty/g2o)
+find_package(dbow2 REQUIRED)
+find_package(g2o REQUIRED)
 
 if(USE_LITE)
 target_link_libraries(${PROJECT_NAME}
    ${OpenCV_LIBS}
    ${EIGEN3_LIBS}
-   ${PROJECT_SOURCE_DIR}/Thirdparty/DBoW2/lib/libDBoW2.so
-   ${PROJECT_SOURCE_DIR}/Thirdparty/g2o/lib/libg2o.so
+   dbow2::dbow2
+   g2o::g2o
+   #${PROJECT_SOURCE_DIR}/Thirdparty/DBoW2/lib/libDBoW2.so
+   #${PROJECT_SOURCE_DIR}/Thirdparty/g2o/lib/libg2o.so
    -lboost_serialization
    -lcrypto
 )
@@ -102,9 +109,11 @@ else()
 target_link_libraries(${PROJECT_NAME}
    ${OpenCV_LIBS}
    ${EIGEN3_LIBS}
-   ${Pangolin_LIBRARIES}
-   ${PROJECT_SOURCE_DIR}/Thirdparty/DBoW2/lib/libDBoW2.so
-   ${PROJECT_SOURCE_DIR}/Thirdparty/g2o/lib/libg2o.so
+   dbow2::dbow2
+   g2o::g2o
+   #${Pangolin_LIBRARIES}
+   #${PROJECT_SOURCE_DIR}/Thirdparty/DBoW2/lib/libDBoW2.so
+   #${PROJECT_SOURCE_DIR}/Thirdparty/g2o/lib/libg2o.so
    -lboost_serialization
    -lcrypto
 )
