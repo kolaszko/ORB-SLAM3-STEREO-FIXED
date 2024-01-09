@@ -29,7 +29,7 @@
 
 #include "optimizable_graph.h"
 #include "creators.h"
-#include "../stuff/macros.h"
+#include "macros.h"
 
 #include <Eigen/Core>
 #include <Eigen/Dense>

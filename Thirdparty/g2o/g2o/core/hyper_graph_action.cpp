@@ -26,7 +26,7 @@
 
 #include "hyper_graph_action.h"
 #include "optimizable_graph.h"
-#include "../stuff/macros.h"
+#include "macros.h"
 
 
 #include <iostream>
