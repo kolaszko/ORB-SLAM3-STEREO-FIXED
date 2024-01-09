@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
 project(DBoW2)
 
 if(NOT CMAKE_BUILD_TYPE)
@@ -43,3 +43,27 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 add_library(DBoW2 SHARED ${SRCS_DBOW2} ${SRCS_DUTILS})
 target_link_libraries(DBoW2 ${OpenCV_LIBS})
 
+set_target_properties(DBoW2
+    PROPERTIES PUBLIC_HEADER
+    "include/DBoW2/BowVector.h;include/DBoW2/FORB.h;include/DBoW2/FClass.h;include/DBoW2/FeatureVector.h;include/DBoW2/ScoringObject.h;include/DBoW2/TemplatedVocabulary.h"
+    )
+
+install(TARGETS DBoW2
+    EXPORT DBoW2Config
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/DBoW2
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    )
+
+export(TARGETS
+    DBoW2
+    NAMESPACE DBoW2::
+    FILE "${CMAKE_CURRENT_BINARY_DIR}/DBoW2Config.cmake"
+)
+
+install(EXPORT
+    DBoW2Config
+    DESTINATION "${CMAKE_INSTALL_LIBDIR}/DBoW2/cmake"
+    NAMESPACE DBoW2::
+)
