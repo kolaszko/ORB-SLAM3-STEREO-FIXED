@@ -333,21 +333,6 @@ namespace ORB_SLAM3 {
             static_cast<KannalaBrandt8*>(calibration2_)->mvLappingArea = vOverlapping;
         }
 
-        //Load stereo extrinsic calibration
-        if(cameraType_ == Rectified){
-            b_ = readParameter<float>(fSettings,"Stereo.b",found);
-            bf_ = b_ * calibration1_->getParameter(0);
-        }
-        else{
-            cv::Mat cvTlr = readParameter<cv::Mat>(fSettings,"Stereo.T_c1_c2",found);
-            Tlr_ = Converter::toSophus(cvTlr);
-
-            //TODO: also search for Trl and invert if necessary
-
-            b_ = Tlr_.translation().norm();
-            bf_ = b_ * calibration1_->getParameter(0);
-        }
-
         thDepth_ = readParameter<float>(fSettings,"Stereo.ThDepth",found);
 
 
@@ -391,6 +376,21 @@ namespace ORB_SLAM3 {
                 float scaleColFactor = (float)newImSize_.width /(float) originalImSize_.width;
                 calibration1_->setParameter(calibration1_->getParameter(0) * scaleColFactor, 0);
                 calibration1_->setParameter(calibration1_->getParameter(2) * scaleColFactor, 2);
+
+                //Load stereo extrinsic calibration
+                if(cameraType_ == Rectified){
+                    b_ = readParameter<float>(fSettings,"Stereo.b",found);
+                    bf_ = b_ * calibration1_->getParameter(0);
+                }
+                else{
+                    cv::Mat cvTlr = readParameter<cv::Mat>(fSettings,"Stereo.T_c1_c2",found);
+                    Tlr_ = Converter::toSophus(cvTlr);
+
+                    //TODO: also search for Trl and invert if necessary
+
+                    b_ = Tlr_.translation().norm();
+                    bf_ = b_ * calibration1_->getParameter(0);
+                }
 
                 if((sensor_ == System::STEREO || sensor_ == System::IMU_STEREO) && cameraType_ != Rectified){
                     calibration2_->setParameter(calibration2_->getParameter(0) * scaleColFactor, 0);
