@@ -82,6 +82,7 @@ configure_file(config.h.in ${g2o_SOURCE_DIR}/g2o/core/config.h)
 
 # Set up the top-level include directories
 INCLUDE_DIRECTORIES(
+${g2o_SOURCE_DIR}/
 ${g2o_SOURCE_DIR}/core
 ${G2O_EIGEN3_INCLUDE})
 
