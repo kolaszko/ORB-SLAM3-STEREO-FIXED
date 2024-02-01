@@ -18,8 +18,8 @@
 
 #include "Settings.h"
 
-#include "CameraModels/Pinhole.h"
-#include "CameraModels/KannalaBrandt8.h"
+#include "Pinhole.h"
+#include "KannalaBrandt8.h"
 
 #include "System.h"
 
@@ -558,7 +558,7 @@ namespace ORB_SLAM3 {
             else{
                 output << "Kannala-Brandt";
             }
-            
+
             if(settings.cameraType_ != Settings::Rectified){
                 output << "" << ": [";
                 for(size_t i = 0; i < settings.originalCalib2_->size(); i++){
