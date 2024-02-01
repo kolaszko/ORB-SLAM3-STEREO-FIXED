@@ -384,3 +384,25 @@ if(realsense2_FOUND)
             Examples_old/Stereo-Inertial/stereo_inertial_realsense_D435i.cc)
     target_link_libraries(stereo_inertial_realsense_D435i_old ${PROJECT_NAME})
 endif()
+
+
+
+install(TARGETS ORB_SLAM3
+    EXPORT ORB_SLAM3Config
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/ORB_SLAM3
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    )
+
+export(TARGETS
+    ORB_SLAM3
+    NAMESPACE ORB_SLAM3::
+    FILE "${CMAKE_CURRENT_BINARY_DIR}/ORB_SLAM3Config.cmake"
+)
+
+install(EXPORT
+    ORB_SLAM3Config
+    DESTINATION "${CMAKE_INSTALL_LIBDIR}/ORB_SLAM3/cmake"
+    NAMESPACE ORB_SLAM3::
+)
