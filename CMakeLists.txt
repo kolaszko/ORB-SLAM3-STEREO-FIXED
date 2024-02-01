@@ -388,6 +388,11 @@ endif()
 
 
 
+set_target_properties(ORB_SLAM3
+    PROPERTIES PUBLIC_HEADER
+    "include/Atlas.h;include/Frame.h;include/KeyFrame.h;include/MapPoint.h;include/ORBmatcher.h;include/System.h;include/G2oTypes.h;include/LocalMapping.h;include/MLPnPsolver.h;include/ORBVocabulary.h;include/Tracking.h;include/Config.h;include/GeometricTools.h;include/LoopClosing.h;include/OptimizableTypes.h;include/SerializationUtils.h;include/TwoViewReconstruction.h;include/Converter.h;include/ImuTypes.h;include/MapDrawer.h;include/Optimizer.h;include/Settings.h;include/Viewer.h;include/FrameDrawer.h;include/KeyFrameDatabase.h;include/Map.h;include/ORBextractor.h;include/Sim3Solver.h;include/CameraModels/GeometricCamera.h;include/CameraModels/KannalaBrandt8.h;include/CameraModels/Pinhole.h"
+    )
+
 install(TARGETS ORB_SLAM3
     EXPORT ORB_SLAM3Config
     ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
