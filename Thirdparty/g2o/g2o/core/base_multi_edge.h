@@ -33,9 +33,9 @@
 
 #include <Eigen/StdVector>
 
-#include "base_edge.h"
-#include "robust_kernel.h"
-#include "../../config.h"
+#include "g2o/core/base_edge.h"
+#include "g2o/core/robust_kernel.h"
+#include "g2o/core/config.h"
 
 namespace g2o {
 
@@ -71,7 +71,7 @@ namespace g2o {
       BaseMultiEdge() : BaseEdge<D,E>()
       {
       }
-      
+
       virtual void linearizeOplus(JacobianWorkspace& jacobianWorkspace);
 
       /**
@@ -79,7 +79,7 @@ namespace g2o {
        * the result in temporary variable vector _jacobianOplus
        */
       virtual void linearizeOplus();
-      
+
       virtual void resize(size_t size);
 
       virtual bool allVerticesFixed() const;

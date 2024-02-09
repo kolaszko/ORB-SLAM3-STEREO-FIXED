@@ -1,12 +1,12 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
 project(DBoW2)
 
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release)
 endif()
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -Wall  -O3 -march=native ")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall  -O3 -march=native")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}  -Wall  -O3 ")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall  -O3")
 
 set(HDRS_DBOW2
   DBoW2/BowVector.h
@@ -22,11 +22,11 @@ set(SRCS_DBOW2
   DBoW2/ScoringObject.cpp)
 
 set(HDRS_DUTILS
-  DUtils/Random.h
-  DUtils/Timestamp.h)
+DBoW2/Random.h
+DBoW2/Timestamp.h)
 set(SRCS_DUTILS
-  DUtils/Random.cpp
-  DUtils/Timestamp.cpp)
+DBoW2/Random.cpp
+DBoW2/Timestamp.cpp)
 
 
 find_package(OpenCV 4 QUIET)
@@ -43,3 +43,27 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 add_library(DBoW2 SHARED ${SRCS_DBOW2} ${SRCS_DUTILS})
 target_link_libraries(DBoW2 ${OpenCV_LIBS})
 
+set_target_properties(DBoW2
+    PROPERTIES PUBLIC_HEADER
+    "DBoW2/BowVector.h;DBoW2/FORB.h;DBoW2/FClass.h;DBoW2/FeatureVector.h;DBoW2/ScoringObject.h;DBoW2/TemplatedVocabulary.h;DBoW2/Random.h;DBoW2/Timestamp.h"
+    )
+
+install(TARGETS DBoW2
+    EXPORT DBoW2Config
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/DBoW2
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+    )
+
+export(TARGETS
+    DBoW2
+    NAMESPACE DBoW2::
+    FILE "${CMAKE_CURRENT_BINARY_DIR}/DBoW2Config.cmake"
+)
+
+install(EXPORT
+    DBoW2Config
+    DESTINATION "${CMAKE_INSTALL_LIBDIR}/DBoW2/cmake"
+    NAMESPACE DBoW2::
+)
